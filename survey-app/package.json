@@ -1,0 +1,18 @@
+{
+    "author": "Max Harper <maxharp3r@gmail.com>",
+    "name": "psyche-filter-survey",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "supervisor --no-restart-on error --extensions 'node|js|json|jade|less' app.js",
+        "test": "mocha -w"
+    },
+    "dependencies": {
+        "async": "*",
+        "express": "3.x",
+        "jade": "0.28"
+    },
+    "devDependencies": {
+        "supervisor": "~0.4.1"
+    }
+}

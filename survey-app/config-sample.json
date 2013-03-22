@@ -1,0 +1,10 @@
+{
+    "bind": {
+        "host": "127.0.0.1",
+        "port": 5500
+    },
+    "siteTitle": "Ubirex Server",
+    "mongo": {
+        "url": "mongodb://localhost:27017/ubirex-dev"
+    }
+}

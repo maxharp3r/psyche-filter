@@ -1,0 +1,4 @@
+.project
+*.swp
+survey-app/node_modules
+survey-app/config.json
