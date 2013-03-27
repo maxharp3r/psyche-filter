@@ -5,6 +5,7 @@ var path = require('path');
 
 // local dependencies
 var config = require('./config.json');
+var routes = require('./src/routes');
 
 var app = express();
 app.configure(function(){
@@ -27,10 +28,8 @@ app.configure('development', function() {
     app.use(express.errorHandler());
 });
 
+app.get('/:name', routes.render_html);
 
-app.get('/survey', function(req, res) {
-    res.sendfile('./public/index.html');
-});
 
 // Angular app
 //app.get('/', routes.angular_app);

@@ -1,0 +1,37 @@
+body.black {
+	background: #000;
+    color: #fff;
+}
+
+.spotlight {
+	background: #000;
+	color: #f00; /* debug */
+	border: 1px solid #f00;
+	position: absolute;
+}
+
+.on {
+	background: #fff;
+	z-index: 999;
+}
+
+#foo {
+	left: 0px;
+	top: 0px;
+	width: 100px;
+	height: 30px;
+}
+
+#bar {
+	left: 10px;
+	top: 10px;
+	width: 100px;
+	height: 30px;
+}
+
+#baz {
+	left: 0px;
+	top: 20px;
+	width: 100px;
+	height: 30px;
+}
