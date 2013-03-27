@@ -5,9 +5,13 @@ body.black {
 
 .spotlight {
     background: #000;
-    color: #f00; /* debug */
-    border: 1px solid #f00;
+    color: transparent;
     position: absolute;
+}
+
+#spotlight-boxes.debug .spotlight {
+    color: #f00;
+    border: 1px solid #f00;
 }
 
 .on {

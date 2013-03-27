@@ -26,11 +26,10 @@ BLACK.demo = function(last_id) {
         var time = BLACK.DELAY_MS * idx;
 
         if (id !== last_id) {
-            console.log("id:", id);
             setTimeout(BLACK.turn_on(id), time);
             setTimeout(BLACK.turn_off(id), time + BLACK.DELAY_MS);
         } else {
-            // stop here
+            // abort loop here - leave this one on
             setTimeout(BLACK.turn_on(id), time);
             return true;
         }
@@ -42,6 +41,6 @@ BLACK.demo = function(last_id) {
 // main()
 $(function() {
     $(document).click(function (event) {
-        BLACK.demo('bar');
+        BLACK.demo('baz');
     });
 });
