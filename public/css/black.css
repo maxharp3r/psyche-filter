@@ -18,24 +18,3 @@ body.black {
     background: #fff;
     z-index: 999;
 }
-
-#foo {
-    left: 0px;
-    top: 0px;
-    width: 100px;
-    height: 30px;
-}
-
-#bar {
-    left: 10px;
-    top: 10px;
-    width: 100px;
-    height: 30px;
-}
-
-#baz {
-    left: 0px;
-    top: 20px;
-    width: 100px;
-    height: 30px;
-}

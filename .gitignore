@@ -1,4 +1,6 @@
 .project
+.pydevproject
+.settings
 *.swp
 node_modules
 config.json

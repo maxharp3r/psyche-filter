@@ -1,0 +1,4 @@
+word,screen,x,y,width,height
+foo,0,0,0,100,30
+bar,0,10,10,100,30
+baz,0,0,20,100,30
