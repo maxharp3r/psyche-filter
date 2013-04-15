@@ -1,96 +1,88 @@
-/*
-  Coupons app
-  
-  $ curl -X GET http://192.168.0.38/print
-  
-  Docs:
-  * http://arduino.cc/en/Reference/Ethernet
-  
-  Circuit:
-  * Ethernet shield attached to pins 10, 11, 12, 13
+/* 
+
+Web_HelloWorld.pde - very simple Webduino example 
+
+curl -X POST --data "text=here is a nifty coupon!\n\n50% off at your next trip.\n" http://192.168.0.38/c
+ 
  */
 
-#include <SPI.h>
-#include <Ethernet.h>
+#include "SPI.h"
+#include "Ethernet.h"
+#include "WebServer.h"
 
-byte mac[] = {  
-  0x90, 0xA2, 0xDA, 0x0D, 0xA7, 0x3D };
-IPAddress ip(192, 168, 0, 38);
+static uint8_t mac[] = { 0x90, 0xA2, 0xDA, 0x0D, 0xA7, 0x3D };
+static uint8_t ip[] = { 192, 168, 0, 38 };
+int led = 13;
 
-// Initialize the Ethernet server library
-// with the IP address and port you want to use 
-// (port 80 is default for HTTP):
-EthernetServer server(80);
+
+/* This creates an instance of the webserver.  By specifying a prefix
+ * of "", all pages will be at the root of the server. */
+#define PREFIX ""
+WebServer webserver(PREFIX, 80);
+
+// messages (read only memory)
+P(helloMsg) = "<h1>Hello, World!</h1>";
+P(couponMsg) = "<h1>Give me a coupon.</h1>\n";
+
+#define NAMELEN 32
+#define VALUELEN 256
+
+
+void helloCmd(WebServer &server, WebServer::ConnectionType type, char *, bool) {
+  server.httpSuccess();
+
+  if (type == WebServer::HEAD) {
+    return;
+  }
+  
+  server.printP(helloMsg);
+  
+//  Serial.println("high");
+//  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+//  delay(1000);               // wait for a second
+//  Serial.println("low");
+//  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+}
+
+void couponCmd(WebServer &server, WebServer::ConnectionType type, char *, bool) {
+  if (type != WebServer::POST) {
+    server.httpFail();
+    server.printP("Use a post");
+    return;
+  }
+  
+  server.httpSuccess();
+  
+  char name[NAMELEN];
+  char value[VALUELEN];
+  
+  server.printP(couponMsg);
+  
+  while (server.readPOSTparam(name, NAMELEN, value, VALUELEN)) {
+    server.print("\n");
+    server.print(name);
+    server.print(" =>");
+    server.print(value);
+    server.print("\n");
+  }
+  
+}
 
 void setup() {
- // Open serial communications and wait for port to open:
-  Serial.begin(9600);
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for Leonardo only
-  }
-
-  // start the Ethernet connection and the server:
   Ethernet.begin(mac, ip);
-  server.begin();
-  Serial.print("server is at ");
-  Serial.println(Ethernet.localIP());
+  webserver.setDefaultCommand(&helloCmd);
+  webserver.addCommand("index.html", &helloCmd);
+  webserver.addCommand("c", &couponCmd);
+  webserver.begin();
+  
+//  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("starting web server");
 }
-
 
 void loop() {
-  // listen for incoming clients
-  EthernetClient client = server.available();
-  if (client) {
-    Serial.println("new client");
-    // an http request ends with a blank line
-    boolean currentLineIsBlank = true;
-    while (client.connected()) {
-      if (client.available()) {
-        char c = client.read();
-        Serial.write(c);
-        // if you've gotten to the end of the line (received a newline
-        // character) and the line is blank, the http request has ended,
-        // so you can send a reply
-        if (c == '\n' && currentLineIsBlank) {
-          // send a standard http response header
-          client.println("HTTP/1.1 200 OK");
-          client.println("Content-Type: text/html");
-          client.println("Connection: close");
-          client.println();
-          client.println("<!DOCTYPE HTML>");
-          client.println("<html>");
-          // client.println("<meta http-equiv=\"refresh\" content=\"5\">");
-          // output the value of each analog input pin
-          for (int analogChannel = 0; analogChannel < 6; analogChannel++) {
-            int sensorReading = analogRead(analogChannel);
-            client.print("analog input ");
-            client.print(analogChannel);
-            client.print(" is ");
-            client.print(sensorReading);
-            client.println("<br />");       
-          }
-          client.println("</html>");
-          break;
-        }
-        if (c == '\n') {
-          // you're starting a new line
-          currentLineIsBlank = true;
-        } 
-        else if (c != '\r') {
-          // you've gotten a character on the current line
-          currentLineIsBlank = false;
-        }
-      }
-    }
-    // give the web browser time to receive the data
-    delay(1);
-    // close the connection:
-    client.stop();
-    Serial.println("client disonnected");
-  }
+  char buff[64];
+  int len = 64;
+  webserver.processConnection(buff, &len);
 }
-
-void sendResponse(EthernetClient client) {
-}
-
 
