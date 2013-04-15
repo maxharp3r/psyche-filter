@@ -2,7 +2,11 @@
 
 Web_HelloWorld.pde - very simple Webduino example 
 
-curl -X POST --data "text=here is a nifty coupon!\n\n50% off at your next trip.\n" http://192.168.0.38/c
+curl -X POST --data "text=here is a nifty coupon" http://192.168.0.38/c
+
+Docs:
+* https://github.com/sirleech/Webduino/
+* https://www.adafruit.com/products/597#Downloads
  
  */
 
