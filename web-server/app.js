@@ -28,6 +28,8 @@ app.configure('development', function() {
     app.use(express.errorHandler());
 });
 
+app.post('/surveys/new', routes.process_survey);
+
 app.get('/:name', routes.render_html);
 
 
