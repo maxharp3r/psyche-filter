@@ -26,17 +26,11 @@ app.configure(function(){
 
 app.configure('development', function() {
     app.use(express.errorHandler());
+    app.locals.pretty = true;
 });
 
 app.post('/surveys/new', routes.process_survey);
-
-app.get('/:name', routes.render_html);
-
-
-// Angular app
-//app.get('/', routes.angular_app);
-//app.get('/domains/*', routes.angular_app);
-
+app.get('/:name', routes.render_jade);
 
 http.createServer(app).listen(config.bind.port, config.bind.host, function () {
     console.log("Express server listening on http://" + config.bind.host + ":" + config.bind.port + "/");

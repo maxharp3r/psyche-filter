@@ -5,6 +5,12 @@ exports.render_html = function(req, res) {
     res.sendfile(path);
 };
 
+exports.render_jade = function(req, res) {
+    var page_name = req.params.name;
+    res.render(page_name, {title: 'psyche filter'});
+};
+
+// post
 exports.process_survey = function(req, res) {
     console.log(req.body);
     res.json({'success': true});

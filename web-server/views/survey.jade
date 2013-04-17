@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1 A survey
+
+  form(ng-controller="SurveyCtrl", ng-submit='submitSurvey()')
+
+    label yourName:
+    input(type='text', ng-model='survey.textInput', placeholder='Enter a name here')
+    div text input: {{survey.textInput}}
+    hr
+
+    select(ng-model='survey.orderProp')
+      option(value='one') Choice 1
+      option(value='two') Choice 2
+    div select input: {{survey.orderProp}}
+    hr
+
+    input(type='radio', ng-model='survey.color', value='red')
+    | Red
+    br
+    input(type='radio', ng-model='survey.color', value='green')
+    | Green
+    br
+    input(type='radio', ng-model='survey.color', value='blue')
+    | Blue
+    br
+    div radio = {{survey.color}}
+    hr
+
+    input.btn-primary(type='submit', value='done')
+
+block scripts
+  script(src="js/vendor/angular-1.0.6.min.js")
+  script(src="js/survey.js")
