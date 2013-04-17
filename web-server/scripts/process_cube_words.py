@@ -14,19 +14,22 @@ CSS = "#${word} { left: ${x}px; top: ${y}px; width: ${width}px; height: ${height
 
 HTML = '<div id="${word}" class="spotlight">${word}</div>\n'
 
+JADE = '    #${word}.spotlight ${word}\n'
+
 
 def main():
     css_out = ""
-    html_out = ["", "", "", ""]
+    html_out = ["", "", "", ""] # one per screen
     css = Template(CSS)
     html = Template(HTML)
+    jade = Template(JADE)
 
     with open('../data/cube-words.csv', 'rb') as csvfile:
         for row in csv.DictReader(csvfile):
             #print row
             screen = int(row['screen'])
             css_out += css.substitute(row)
-            html_out[screen] += html.substitute(row)
+            html_out[screen] += jade.substitute(row)
 
     # print CSS to stdout, and write the file directly
     print BREAK % ("css")
