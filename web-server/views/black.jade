@@ -12,3 +12,9 @@ block content
 
 block scripts
   script(src="/js/black.js")
+  script
+    var socket = io.connect('http://192.168.0.5:5500');
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });

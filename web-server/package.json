@@ -10,7 +10,8 @@
     "dependencies": {
         "async": "*",
         "express": "3.x",
-        "jade": "0.28"
+        "jade": "0.28",
+        "socket.io": "0.9.14"
     },
     "devDependencies": {
         "supervisor": "~0.4.1"

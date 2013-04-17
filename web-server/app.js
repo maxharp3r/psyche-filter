@@ -32,6 +32,15 @@ app.configure('development', function() {
 app.post('/surveys/new', routes.process_survey);
 app.get('/:name', routes.render_jade);
 
-http.createServer(app).listen(config.bind.port, config.bind.host, function () {
+var server = http.createServer(app).listen(config.bind.port, config.bind.host, function () {
     console.log("Express server listening on http://" + config.bind.host + ":" + config.bind.port + "/");
 });
+
+var io = require('socket.io').listen(server);
+io.sockets.on('connection', function (socket) {
+    socket.emit('news', { hello: 'world' });
+    socket.on('my other event', function (data) {
+        console.log(data);
+    });
+});
+
