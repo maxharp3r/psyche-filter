@@ -36,7 +36,10 @@ var server = http.createServer(app).listen(config.bind.port, config.bind.host, f
     console.log("Express server listening on http://" + config.bind.host + ":" + config.bind.port + "/");
 });
 
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {
+  // see https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO
+  'log level': 1
+});
 io.sockets.on('connection', function (socket) {
     socket.emit('news', { hello: 'world' });
     socket.on('my other event', function (data) {
