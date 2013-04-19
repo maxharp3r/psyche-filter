@@ -4,7 +4,7 @@ var BLACK = {};
 
 BLACK.DELAY_MS = 100;
 
-BLACK.ids = ['foo', 'bar', 'baz'];
+BLACK.ids = ['absent-minded','accommodating','accurate','agitated','agreeable','aloof','altruistic','anti-intellectual','antisocial','anxious','argumentative','ashamed','assertive','blunt','brassy','callous','calm','carefree','careless','chaotic','cheerful','civic-minded','civil','clever','closed-minded','cocky','cold','collected','compassionate','competent','composed','confident','conforming','conscientious','conservative','considerate','controls_emotions','conventional','cool-headed','cooperative','creative','cynical','daydreamer','defiant','depressive','detail_oriented','dirty','disagreeable'];
 
 BLACK.turn_on = function(css_id) {
     return function() {
@@ -41,6 +41,6 @@ BLACK.demo = function(last_id) {
 // main()
 $(function() {
     $(document).click(function (event) {
-        BLACK.demo('baz');
+        BLACK.demo('disagreeable');
     });
 });
