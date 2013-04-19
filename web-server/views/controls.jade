@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  form(ng-controller="SocketCtrl", ng-submit='emit_word()')
+
+    label word:
+    input(type='text', ng-model='controls.word', placeholder='Enter a name here')
+    // | text input: {{controls.word}}
+    input.btn-primary(type='button', value='emit', ng-click='emit_word()')
+    hr
+
+
+block scripts
+  script(src="js/vendor/angular-1.0.6.min.js")
+  script
+    var socket = io.connect('http://192.168.0.5:5500');
+
+    function SocketCtrl($scope) {
+      $scope.emit_word = function() {
+        console.log("emit CMD:word", $scope.controls.word);
+        socket.emit('CMD:word', $scope.controls.word);
+      }
+    }
+

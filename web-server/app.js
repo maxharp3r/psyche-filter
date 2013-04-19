@@ -41,9 +41,9 @@ var io = require('socket.io').listen(server, {
   'log level': 1
 });
 io.sockets.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
+    socket.on('CMD:word', function (word) {
+        console.log("on CMD:word", word);
+        io.sockets.emit('CMD:word', word);
     });
 });
 
