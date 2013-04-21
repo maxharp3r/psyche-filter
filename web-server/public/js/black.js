@@ -30,7 +30,15 @@ BLACK.all_off = function() {
     $('.spotlight').removeClass('on');
 }
 
-BLACK.reload_page = function() {
+BLACK.debug_on = function() {
+    $('#spotlight-boxes').addClass('debug');
+}
+
+BLACK.debug_off = function() {
+    $('#spotlight-boxes').removeClass('debug');
+}
+
+BLACK.reload = function() {
     window.location.reload(true);
 }
 
@@ -59,17 +67,16 @@ BLACK.go = function(words) {
 BLACK.socket = io.connect(CONFIG.server_addr);
 
 BLACK.socket.on('CMD:words', function (words) {
-  console.log("on CMD:words", words);
-  BLACK.go(words);
+    console.log("on CMD:words", words);
+    BLACK.go(words);
 });
 
 BLACK.socket.on('CMD:control', function (cmd) {
-  console.log("on CMD:control", cmd);
-  if (cmd === "reload") {
-      BLACK.reload_page();
-  } else if (cmd === "all_on") {
-      BLACK.all_on();
-  } else if (cmd === "all_off") {
-      BLACK.all_off();
-  }
+    console.log("on CMD:control", cmd);
+    var fn = BLACK[cmd];
+    if (fn) {
+        fn();
+    } else {
+        console.warn("unexpected cmd: ", cmd);
+    }
 });
