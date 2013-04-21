@@ -5,9 +5,9 @@ CONTROLS.socket = io.connect(CONFIG.server_addr);
 
 function SocketCtrl($scope) {
 
-  $scope.emit_word = function() {
-    console.log("emit CMD:word", $scope.controls.word);
-    CONTROLS.socket.emit('CMD:word', $scope.controls.word);
+  $scope.emit_words = function() {
+    console.log("emit CMD:words", $scope.controls.words);
+    CONTROLS.socket.emit('CMD:words', $scope.controls.words);
   }
 
   $scope.emit_reload = function() {

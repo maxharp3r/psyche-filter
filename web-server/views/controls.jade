@@ -5,11 +5,11 @@ block content
   h1 a control panel
 
   div(ng-controller="SocketCtrl")
-    form(ng-submit='emit_word()')
-      label word:
-      input(type='text', ng-model='controls.word', placeholder='Enter a name here')
-      // | text input: {{controls.word}}
-      input.btn-primary(type='button', value='emit', ng-click='emit_word()')
+    form(ng-submit='emit_words()')
+      label words (comma-delimited):
+      input(type='text', ng-model='controls.words', placeholder='Enter a name here')
+      // | text input: {{controls.words}}
+      input.btn-primary(type='button', value='emit', ng-click='emit_words()')
     hr
     input.btn-primary(type='button', value='reload cube windows', ng-click='emit_reload()')
 

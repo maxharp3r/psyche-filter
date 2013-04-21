@@ -42,9 +42,9 @@ var io = require('socket.io').listen(server, {
 });
 io.sockets.on('connection', function (socket) {
 
-    socket.on('CMD:word', function (word) {
-        console.log("on CMD:word", word);
-        io.sockets.emit('CMD:word', word);
+    socket.on('CMD:words', function (words) {
+        console.log("on CMD:words", words);
+        io.sockets.emit('CMD:words', words);
     });
 
     socket.on('CMD:reload', function () {

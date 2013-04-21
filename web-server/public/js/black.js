@@ -26,31 +26,33 @@ BLACK.reload_page = function() {
     window.location.reload(true);
 }
 
-
-BLACK.demo = function(last_id) {
+// words is comma separated, e.g.:
+// foo, bar, baz
+BLACK.go = function(words) {
     $('.spotlight').removeClass('on');
 
-    _.any(BLACK.ids, function(id, idx) {
+    var word_set = {}
+    _.each(words.split(","), function(word) { word_set[word.trim()] = true; });
+
+    _.each(BLACK.ids, function(id, idx) {
         var time = BLACK.DELAY_MS * idx;
 
-        if (id !== last_id) {
+        if (_.has(word_set, id)) {
+            // leave this one on
+            setTimeout(BLACK.turn_on(id), time);
+        } else {
             setTimeout(BLACK.turn_on(id), time);
             setTimeout(BLACK.turn_off(id), time + BLACK.DELAY_MS);
-        } else {
-            // abort loop here - leave this one on
-            setTimeout(BLACK.turn_on(id), time);
-            //return true;
         }
-        return false;
     });
 
 };
 
 BLACK.socket = io.connect(CONFIG.server_addr);
 
-BLACK.socket.on('CMD:word', function (word) {
-  console.log("on CMD:word", word);
-  BLACK.demo(word);
+BLACK.socket.on('CMD:words', function (words) {
+  console.log("on CMD:words", words);
+  BLACK.go(words);
 });
 
 BLACK.socket.on('CMD:reload', function () {
