@@ -10,9 +10,3 @@ block content
 
 block scripts
   script(src="/js/black.js")
-  script
-    var socket = io.connect('http://192.168.0.5:5500');
-    socket.on('CMD:word', function (word) {
-      console.log("on CMD:word", word);
-      BLACK.demo(word);
-    });

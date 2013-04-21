@@ -22,6 +22,10 @@ BLACK.turn_off = function(css_id) {
     }
 }
 
+BLACK.reload_page = function() {
+    window.location.reload(true);
+}
+
 
 BLACK.demo = function(last_id) {
     $('.spotlight').removeClass('on');
@@ -42,9 +46,14 @@ BLACK.demo = function(last_id) {
 
 };
 
-// main()
-$(function() {
-    $(document).click(function (event) {
-        BLACK.demo('disagreeable');
-    });
+BLACK.socket = io.connect(CONFIG.server_addr);
+
+BLACK.socket.on('CMD:word', function (word) {
+  console.log("on CMD:word", word);
+  BLACK.demo(word);
+});
+
+BLACK.socket.on('CMD:reload', function () {
+  console.log("on CMD:reload");
+  BLACK.reload_page();
 });

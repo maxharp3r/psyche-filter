@@ -41,9 +41,16 @@ var io = require('socket.io').listen(server, {
   'log level': 1
 });
 io.sockets.on('connection', function (socket) {
+
     socket.on('CMD:word', function (word) {
         console.log("on CMD:word", word);
         io.sockets.emit('CMD:word', word);
     });
+
+    socket.on('CMD:reload', function () {
+        console.log("on CMD:reload");
+        io.sockets.emit('CMD:reload');
+    });
+
 });
 
