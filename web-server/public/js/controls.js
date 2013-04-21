@@ -10,9 +10,13 @@ function SocketCtrl($scope) {
     CONTROLS.socket.emit('CMD:words', $scope.controls.words);
   }
 
-  $scope.emit_reload = function() {
-    console.log("emit CMD:reload");
-    CONTROLS.socket.emit('CMD:reload');
+  _emit_cmd = function(cmd) {
+      console.log("emit CMD:control", cmd);
+      CONTROLS.socket.emit('CMD:control', cmd);
   }
+
+  $scope.emit_all_on = function() { _emit_cmd('all_on'); }
+  $scope.emit_all_off = function() { _emit_cmd('all_off'); }
+  $scope.emit_reload = function() { _emit_cmd('reload'); }
 
 }

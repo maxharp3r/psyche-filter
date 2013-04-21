@@ -47,9 +47,9 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('CMD:words', words);
     });
 
-    socket.on('CMD:reload', function () {
-        console.log("on CMD:reload");
-        io.sockets.emit('CMD:reload');
+    socket.on('CMD:control', function (cmd) {
+        console.log("on CMD:control", cmd);
+        io.sockets.emit('CMD:control', cmd);
     });
 
 });

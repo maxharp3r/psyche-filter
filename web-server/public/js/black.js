@@ -22,6 +22,14 @@ BLACK.turn_off = function(css_id) {
     }
 }
 
+BLACK.all_on = function() {
+    $('.spotlight').addClass('on');
+}
+
+BLACK.all_off = function() {
+    $('.spotlight').removeClass('on');
+}
+
 BLACK.reload_page = function() {
     window.location.reload(true);
 }
@@ -29,7 +37,7 @@ BLACK.reload_page = function() {
 // words is comma separated, e.g.:
 // foo, bar, baz
 BLACK.go = function(words) {
-    $('.spotlight').removeClass('on');
+    BLACK.all_off()
 
     var word_set = {}
     _.each(words.split(","), function(word) { word_set[word.trim()] = true; });
@@ -55,7 +63,13 @@ BLACK.socket.on('CMD:words', function (words) {
   BLACK.go(words);
 });
 
-BLACK.socket.on('CMD:reload', function () {
-  console.log("on CMD:reload");
-  BLACK.reload_page();
+BLACK.socket.on('CMD:control', function (cmd) {
+  console.log("on CMD:control", cmd);
+  if (cmd === "reload") {
+      BLACK.reload_page();
+  } else if (cmd === "all_on") {
+      BLACK.all_on();
+  } else if (cmd === "all_off") {
+      BLACK.all_off();
+  }
 });
