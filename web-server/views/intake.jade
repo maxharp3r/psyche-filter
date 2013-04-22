@@ -4,31 +4,32 @@ block stylesheets
   link(rel='stylesheet', href='/css/intake.css')
 
 block content
-  .spacer
-  .spacer
+  form(ng-controller="IntakeCtrl", ng-submit='submitSurvey()')
+    .spacer
+    .spacer
 
-  .row-fluid
-    .span6.offset3
-      div.big-button
-        | start
+    .row-fluid
+      .span6.offset3
+        div.big-button(ng-click="scrollTo('foo')")
+          | start
 
-  .spacer
-  .spacer
+    .spacer
+    .spacer
 
-  .row-fluid
-    .span4
-      img(src='img/02_news_01.png')
-    .span4
-      img(src='img/02_news_02.png')
-    .span4
-      img(src='img/02_news_03.png')
+    .row-fluid#foo
+      .span4
+        img(src='img/02_news_01.png')
+      .span4
+        img(src='img/02_news_02.png')
+      .span4
+        img(src='img/02_news_03.png')
 
-  .row-fluid
-    .span6
-      img(src='img/04_catdog_01.png')
-    .span6
-      img(src='img/04_catdog_02.png')
+    .row-fluid
+      .span6
+        img(src='img/04_catdog_01.png')
+      .span6
+        img(src='img/04_catdog_02.png')
 
 
 block scripts
-  script(src="js/controls.js")
+  script(src="js/intake.js")
