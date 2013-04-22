@@ -1,0 +1,155 @@
+body {
+    font-size: 30px;
+    line-height: 1.4;
+    background-color: #6A6B6E;
+}
+
+div.option img {
+    width: 100%;
+}
+
+/* ===================
+    6 grid
+   =================== */
+ul#grid {
+    list-style: none;
+    margin: 20px auto 0;
+    width: 1100px;
+}
+
+#grid li {
+    float: left;
+    margin: 0 px;
+}
+
+.question {
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 1100px;
+    text-align: center;
+}
+
+.shadow {
+    -moz-box-shadow: 3px 3px 4px #000;
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;
+}
+
+#grid li a:hover img {
+    opacity: 0.6;
+    filter: alpha(opacity = 30);
+}
+
+#grid li img {
+    padding: 7px;
+    margin: 0;
+    border: 0px;
+    width: 300px;
+    height: 233px;
+}
+
+#grid li a {
+    display: block;
+}
+
+/* ===================
+    2 grid
+   =================== */
+ul#grid2 {
+    list-style: none;
+    margin: 20px auto 0;
+    width: 1100px;
+}
+
+#grid2 li {
+    float: left;
+    margin: 0 px;
+}
+
+.question {
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 1100px;
+    text-align: center;
+}
+
+.shadow {
+    -moz-box-shadow: 3px 3px 4px #000;
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;
+}
+
+#grid2 li a:hover img {
+    opacity: 0.6;
+    filter: alpha(opacity = 30);
+}
+
+#grid2 li img {
+    padding: 5px;
+    margin: 0;
+    border: 0px;
+    width: 465px;
+    height: 542px;
+}
+
+#grid2 li a {
+    display: block;
+}
+
+/* ===================
+    1 grid
+   =================== */
+ul#grid3 {
+    list-style: none;
+    margin: 20px auto 0;
+    width: 1100px;
+}
+
+#grid3 li {
+    float: left;
+    margin: 0 px;
+}
+
+.question {
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 1100px;
+    text-align: center;
+}
+
+.shadow {
+    -moz-box-shadow: 3px 3px 4px #000;
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;
+}
+
+#grid3 li a:hover img {
+    opacity: 0.6;
+    filter: alpha(opacity = 30);
+}
+
+#grid3 li img {
+    padding: 5px;
+    margin: 0;
+    border: 0px;
+    width: 900px;
+    height: 636px;
+}
+
+#grid3 li img .thumbsup {
+    padding: 5px;
+    margin: 0;
+    border: 0px;
+    width: 40px;
+    height: 40px;
+}
+
+#grid3 li a {
+    display: block;
+}

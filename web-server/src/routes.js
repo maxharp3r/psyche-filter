@@ -7,7 +7,7 @@ exports.render_html = function(req, res) {
 
 exports.render_jade = function(req, res) {
     var page_name = req.params.name;
-    res.render(page_name, {title: 'psyche filter'});
+    res.render(page_name, {title: 'profile cube'});
 };
 
 // post

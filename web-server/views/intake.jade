@@ -1,0 +1,28 @@
+extends layout
+
+block stylesheets
+  link(rel='stylesheet', href='/css/intake.css')
+
+block content
+  .row-fluid.option
+    .span4
+      div.option
+        img(src='img/02_news_01.png')
+    .span4
+      div.option
+        img(src='img/02_news_02.png')
+    .span4
+      div.option
+        img(src='img/02_news_03.png')
+
+  .row-fluid.option
+    .span6
+      div.option
+        img(src='img/04_catdog_01.png')
+    .span6
+      div.option
+        img(src='img/04_catdog_02.png')
+
+
+block scripts
+  script(src="js/controls.js")
