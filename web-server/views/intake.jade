@@ -4,24 +4,30 @@ block stylesheets
   link(rel='stylesheet', href='/css/intake.css')
 
 block content
-  .row-fluid.option
-    .span4
-      div.option
-        img(src='img/02_news_01.png')
-    .span4
-      div.option
-        img(src='img/02_news_02.png')
-    .span4
-      div.option
-        img(src='img/02_news_03.png')
+  .spacer
+  .spacer
 
-  .row-fluid.option
+  .row-fluid
+    .span6.offset3
+      div.big-button
+        | start
+
+  .spacer
+  .spacer
+
+  .row-fluid
+    .span4
+      img(src='img/02_news_01.png')
+    .span4
+      img(src='img/02_news_02.png')
+    .span4
+      img(src='img/02_news_03.png')
+
+  .row-fluid
     .span6
-      div.option
-        img(src='img/04_catdog_01.png')
+      img(src='img/04_catdog_01.png')
     .span6
-      div.option
-        img(src='img/04_catdog_02.png')
+      img(src='img/04_catdog_02.png')
 
 
 block scripts
