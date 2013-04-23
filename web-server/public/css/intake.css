@@ -1,4 +1,5 @@
 body {
+    color: #000;
     font-size: 64px;
     line-height: 1;
     background-color: #6A6B6E;
@@ -12,12 +13,15 @@ body img {
     min-height:800px;
 }
 
+div.header {
+    height: 1em;
+}
+
 div.spacer {
     height: 50px;
 }
 
 div.big-button {
-    color: #000;
     background: yellow;
     text-align: center;
     border-radius: 15px;
@@ -26,16 +30,21 @@ div.big-button {
     margin-top:100px;
     padding: 1em 0;
 }
+div.big-button div.title { font-size: 2.5em; }
+div.big-button div.text { font-size: 1em; line-height: 1.2; }
+div.big-button div.fineprint { font-size: 0.5em; }
 
-div.big-button div.title {
-    font-size: 2.5em;
+input[type="radio"].label-only {
+  display: none;
 }
-
-div.big-button div.text {
-    font-size: 1em;
-    line-height: 1.2;
-}
-
-div.big-button div.fineprint {
-    font-size: 0.5em;
+.sixth-button {
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    border-radius: 15px;
+    text-shadow: 5px 5px 10px #666;
+    cursor: hand; cursor: pointer;
+    margin-top:.25em;
+    padding: 1em 0;
+    min-height: 128px;
 }
