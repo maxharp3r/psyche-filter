@@ -50,3 +50,15 @@ input[type="radio"].label-only {
     padding: 1em 0;
     min-height: 128px;
 }
+
+label.textlabel {
+    min-height: 10px;
+}
+label.textlabel img {
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+}
+
