@@ -15,7 +15,8 @@ body img {
 }
 
 div.header {
-    height: 1em;
+    height: 2em;
+    font-size: .25em;
 }
 
 div.spacer {
@@ -38,7 +39,7 @@ div.big-button div.fineprint { font-size: 0.5em; }
 input[type="radio"].label-only {
   display: none;
 }
-.sixth-button {
+.survey-button {
     width: 100%;
     background: transparent;
     text-align: center;
