@@ -4,14 +4,25 @@ block stylesheets
   link(rel='stylesheet', href='/css/intake.css')
 
 block content
-  form(ng-controller="IntakeCtrl", ng-submit='submitSurvey()')
-    .spacer
-    .spacer
+  form.form-inline(ng-controller="IntakeCtrl", ng-submit='submitSurvey()')
 
-    .row-fluid
+    .row-fluid.page
       .span6.offset3
-        div.big-button(ng-click="scrollTo('foo')")
-          | start
+        div.big-button(ng-click="scrollTo('page_thanks')")
+          .title start
+
+    .row-fluid.page#page_thanks
+      .span6.offset3
+        div.big-button(ng-click="scrollTo('page_name')")
+          .text thank you
+          .fineprint for agreeing to our terms of use
+
+    .row-fluid.page#page_name
+      .span6.offset3
+        div.big-button
+          .fineprint what is your name?
+          input(type='text', ng-model='survey.textInput', placeholder='Enter a name here')
+          input.btn(type='button', value='next question', ng-click="scrollTo('foo')")
 
     .spacer
     .spacer
