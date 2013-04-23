@@ -15,32 +15,41 @@ block content
       .span6.offset3
         .big-button(ng-click="scrollTo('page_name')")
           .text thank you
+          div(style="margin-bottom:.5em")
           .fineprint for agreeing to our terms of use
 
     .row-fluid.page#page_name
       .span6.offset3
         .big-button
           .fineprint what is your first name?
-          input(type='text', ng-model='survey.name', placeholder='Enter a name here')
-          input.btn(type='button', value='next question', ng-click="scrollTo('page_01')")
+          div(style="margin-bottom:.5em")
+          input.huge(type='text', ng-model='survey.name', placeholder='Enter a name here')
+          div(style="width:50%; margin-left:120px;")
+            input.btn.btn-large.btn-block(type='button', value='next question', ng-click="scrollTo('page_01')")
 
     .header#page_01 FOO: {{survey}}
     .row-fluid.page
       .span4
         input.label-only#page_01_01(type='radio', ng-model='survey.01', value='1')
-        label.survey-button(for="page_01_01", style="background:rgb(209,33,41)", ng-click="scrollTo('page_02')")
+        label.survey-button(for="page_01_01", ng-click="scrollTo('page_02')")
+          img(src='img/01_01.png')
         input.label-only#page_01_04(type='radio', ng-model='survey.01', value='4')
-        label.survey-button(for="page_01_04", style="background:rgb(247,147,52)", ng-click="scrollTo('page_02')")
+        label.survey-button(for="page_01_04", ng-click="scrollTo('page_02')")
+          img(src='img/01_04.png')
       .span4
         input.label-only#page_01_02(type='radio', ng-model='survey.01', value='2')
-        label.survey-button(for="page_01_02", style="background:rgb(246,175,206)", ng-click="scrollTo('page_02')")
+        label.survey-button(for="page_01_02", ng-click="scrollTo('page_02')")
+          img(src='img/01_02.png')
         input.label-only#page_01_05(type='radio', ng-model='survey.01', value='5')
-        label.survey-button(for="page_01_05", style="background:rgb(162,77,36)", ng-click="scrollTo('page_02')")
+        label.survey-button(for="page_01_05", ng-click="scrollTo('page_02')")
+          img(src='img/01_05.png')
       .span4
         input.label-only#page_01_03(type='radio', ng-model='survey.01', value='3')
-        label.survey-button(for="page_01_03", style="background:rgb(254,241,82)", ng-click="scrollTo('page_02')")
+        label.survey-button(for="page_01_03", ng-click="scrollTo('page_02')")
+          img(src='img/01_03.png')
         input.label-only#page_01_06(type='radio', ng-model='survey.01', value='6')
-        label.survey-button(for="page_01_06", style="background:rgb(2,154,199)", ng-click="scrollTo('page_02')")
+        label.survey-button(for="page_01_06", ng-click="scrollTo('page_02')")
+          img(src='img/01_06.png')
 
     .header#page_02 FOO: {{survey}}
     .row-fluid.page
@@ -507,7 +516,7 @@ block content
       .span6.offset3
         .big-button(ng-click="alert('done')")
           .text thank you
-          .text foobar {{survey.name}}
+          .text {{survey.name}}
           div(style="margin-bottom:.5em")
           .fineprint visit our profile cube
           .fineprint to view your results

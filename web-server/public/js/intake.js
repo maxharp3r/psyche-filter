@@ -1,7 +1,10 @@
 
 function scrollToAnchor(aid) {
-    var aTag = $("a[name='"+ aid +"']");
-    $('html,body').animate({scrollTop: $('#' + aid).offset().top}, 'slow');
+    // var aTag = $("a[name='"+ aid +"']");
+    // $('html,body').animate({scrollTop: $('#' + aid).offset().top}, 'fast');
+
+    var y = $('#' + aid).offset().top;
+    $('body').scrollTop(y);
 }
 
 function IntakeCtrl($scope, $http, $location, $anchorScroll) {
