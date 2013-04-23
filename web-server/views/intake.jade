@@ -209,6 +209,20 @@ block content
         label.survey-button(for="page_10_02", ng-click="scrollTo('page_11')")
           img(src='img/10_02.png')
 
+    .header#page_11 FOO: {{survey}}
+    .row-fluid.page
+      .span6.offset2
+        .survey-button
+          img(src='img/11_01.png')
+      .span2.offset1
+        div(style="margin-top:180px")
+        input.label-only#page_11_01(type='radio', ng-model='survey.11', value='1')
+        label.survey-button(for="page_11_01", ng-click="scrollTo('page_12')")
+          img(src='img/up.png')
+        input.label-only#page_11_02(type='radio', ng-model='survey.11', value='2')
+        label.survey-button(for="page_11_02", ng-click="scrollTo('page_12')")
+          img(src='img/down.png')
+
 
 block scripts
   script(src="js/intake.js")
