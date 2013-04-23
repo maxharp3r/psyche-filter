@@ -40,7 +40,7 @@ input[type="radio"].label-only {
 }
 .sixth-button {
     width: 100%;
-    background: #fff;
+    background: transparent;
     text-align: center;
     border-radius: 15px;
     text-shadow: 5px 5px 10px #666;
