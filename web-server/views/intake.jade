@@ -28,31 +28,43 @@ block content
     .row-fluid.page
       .span4
         input.label-only#page_colors_red(type='radio', ng-model='survey.color', value='red')
-        label.sixth-button(for="page_colors_red", style="background:rgb(209,33,41)")
+        label.sixth-button(for="page_colors_red", style="background:rgb(209,33,41)", ng-click="scrollTo('page_news')")
         input.label-only#page_colors_orange(type='radio', ng-model='survey.color', value='orange')
-        label.sixth-button(for="page_colors_orange", style="background:rgb(247,147,52)")
+        label.sixth-button(for="page_colors_orange", style="background:rgb(247,147,52)", ng-click="scrollTo('page_news')")
       .span4
         input.label-only#page_colors_pink(type='radio', ng-model='survey.color', value='pink')
-        label.sixth-button(for="page_colors_pink", style="background:rgb(246,175,206)")
+        label.sixth-button(for="page_colors_pink", style="background:rgb(246,175,206)", ng-click="scrollTo('page_news')")
         input.label-only#page_colors_brown(type='radio', ng-model='survey.color', value='brown')
-        label.sixth-button(for="page_colors_brown", style="background:rgb(162,77,36)")
+        label.sixth-button(for="page_colors_brown", style="background:rgb(162,77,36)", ng-click="scrollTo('page_news')")
       .span4
         input.label-only#page_colors_yellow(type='radio', ng-model='survey.color', value='yellow')
-        label.sixth-button(for="page_colors_yellow", style="background:rgb(254,241,82)")
+        label.sixth-button(for="page_colors_yellow", style="background:rgb(254,241,82)", ng-click="scrollTo('page_news')")
         input.label-only#page_colors_blue(type='radio', ng-model='survey.color', value='blue')
-        label.sixth-button(for="page_colors_blue", style="background:rgb(2,154,199)")
+        label.sixth-button(for="page_colors_blue", style="background:rgb(2,154,199)", ng-click="scrollTo('page_news')")
 
-    .header#page_colors_xxxxxx
+    .header#page_news FOO: {{survey}}
     .row-fluid.page
       .span4
-        .sixth-button(style="background:rgb(209,33,41)", ng-click="scrollTo('page_news')")
-        .sixth-button(style="background:rgb(247,147,52)", ng-click="scrollTo('page_news')")
+        input.label-only#page_news_msnbc(type='radio', ng-model='survey.news', value='msnbc')
+        label.sixth-button(for="page_news_msnbc")
+          img(src='img/02_news_01.png')
+        input.label-only#page_news_fox(type='radio', ng-model='survey.news', value='fox')
+        label.sixth-button(for="page_news_fox")
+          img(src='img/02_news_04.png')
       .span4
-        .sixth-button(style="background:rgb(246,175,206)", ng-click="scrollTo('page_news')")
-        .sixth-button(style="background:rgb(162,77,36)", ng-click="scrollTo('page_news')")
+        input.label-only#page_news_cnn(type='radio', ng-model='survey.news', value='cnn')
+        label.sixth-button(for="page_news_cnn")
+          img(src='img/02_news_02.png')
+        input.label-only#page_news_drudge(type='radio', ng-model='survey.news', value='drudge')
+        label.sixth-button(for="page_news_drudge")
+          img(src='img/02_news_05.png')
       .span4
-        .sixth-button(style="background:rgb(254,241,82)", ng-click="scrollTo('page_news')")
-        .sixth-button(style="background:rgb(2,154,199)", ng-click="scrollTo('page_news')")
+        input.label-only#page_news_facebook(type='radio', ng-model='survey.news', value='facebook')
+        label.sixth-button(for="page_news_facebook")
+          img(src='img/02_news_03.png')
+        input.label-only#page_news_npr(type='radio', ng-model='survey.news', value='npr')
+        label.sixth-button(for="page_news_npr")
+          img(src='img/02_news_06.png')
 
     .spacer
     .spacer
