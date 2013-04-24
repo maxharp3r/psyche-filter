@@ -6,6 +6,7 @@ var path = require('path');
 // local dependencies
 var config = require('./config.json');
 var routes = require('./src/routes');
+var scorer = require('./src/scorer');
 
 var app = express();
 app.configure(function(){
@@ -29,7 +30,11 @@ app.configure('development', function() {
     app.locals.pretty = true;
 });
 
-app.post('/surveys/new', routes.process_survey);
+app.post('/surveys/new', function(req, res) {
+    console.log("body:", req.body);
+    scorer.survey_to_word_list(req.body);
+    res.json({'success': true});
+});
 app.get('/:name', routes.render_jade);
 
 var server = http.createServer(app).listen(config.bind.port, config.bind.host, function () {

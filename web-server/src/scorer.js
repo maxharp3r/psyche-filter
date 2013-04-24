@@ -1,5 +1,7 @@
 
+var _ = require('underscore');
 
+var QUESTIONS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'];
 
 var ANSWERS_TO_CATS = {
     "01:1": ["volatility","enthusiasm","assertiveness"],
@@ -124,5 +126,63 @@ var CATS_TO_WORDS = {
     "orderliness": ["orderly", "tidy", "composed", "law_abiding", "detail_oriented", "well-groomed", "organized", "perfectionist", "structured"],
     "x_orderliness": ["unprepared", "haphazard", "disheveled", "scruffy", "sloppy", "dirty", "chaotic", "spontaneous", "absent-minded"]
 };
+
+var SUPER1 = ["volatility", "x_volatility", "withdrawal", "x_withdrawal"];
+var SUPER2 = ["enthusiasm", "x_enthusiasm", "assertiveness", "x_assertiveness"];
+var SUPER3 = ["compassion", "x_compassion", "politeness", "x_politeness"];
+var SUPER4 = ["intellect", "x_intellect", "openness", "x_openness"];
+var SUPER5 = ["industriousness", "x_industriousness", "orderliness", "x_orderliness"];
+var ALL_SUPER_CATS = [SUPER1, SUPER2, SUPER3, SUPER4, SUPER5];
+
+exports.survey_to_word_list = function(survey_results) {
+    // FAKE
+    // var survey_results = { '10': '1', '11': '1', '12': '1', '13': '1', '14': '1', '15': '1', '16': '1', '17': '1', '18': '1', '19': '1', '20': '1', '21': '1', '22': '1', '23': '1', '24': '1', name: 'Max', '01': '1', '02': '1', '03': '1', '04': '1', '05': '1', '06': '1', '07': '1', '08': '1', '09': '1' };
+    var survey_results = { '10': '2', '11': '2', '12': '3', '13': '6', '14': '6', '15': '2', '16': '6', '17': '4', '18': '6', '19': '6', '20': '2', '21': '6', '22': '2', '23': '6', '24': '6', name: 'Joo Aoo', '01': '6', '02': '6', '03': '2', '04': '6', '05': '3', '06': '2', '07': '6', '08': '6', '09': '6' };
+
+    // build a list of cats (contains dups)
+    var cats = [];
+    _.each(QUESTIONS, function(q) {
+        var response = survey_results[q];
+        if (response) {
+            var key = q + ":" + response;
+            var rsp_cats = ANSWERS_TO_CATS[key];
+            if (rsp_cats) {
+                cats = cats.concat(rsp_cats);
+            }
+        }
+    });
+    // console.log(cats);
+
+    // list of cats => map of cats to counts
+    var cats_count = _.reduce(cats, function(memo, item) {
+        if (!memo[item]) {
+            memo[item] = 1;
+        } else {
+            memo[item] = memo[item] + 1;
+        }
+        return memo;
+    }, {});
+    // console.log(cats_count);
+
+    // return value
+    var the_words = [];
+
+    // find the top cat from each super-category
+    _.each(ALL_SUPER_CATS, function(super_cat) {
+        // TODO: what about ties?  Should we choose randomly?
+        var sorted_cats = _.sortBy(super_cat, function(word) {
+            return cats_count[word] || 0;
+        });
+        var best_cat = _.last(sorted_cats);
+        // console.log("best cat", best_cat);
+
+        // append the words
+        the_words = the_words.concat(CATS_TO_WORDS[best_cat]);
+    });
+    console.log("the words", the_words);
+
+    return the_words;
+};
+
 
 
