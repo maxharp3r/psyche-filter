@@ -25,6 +25,16 @@ function IntakeCtrl($scope, $http, $location, $anchorScroll) {
 
     $scope.submitSurvey = function() {
         console.log("process survey", $scope.survey);
+
+        $http({
+            url: CONFIG.server_addr + "/surveys/new",
+            method: "POST",
+            data: $scope.survey
+        }).success(function(data, status, headers, config) {
+            $scope.data = data;
+        }).error(function(data, status, headers, config) {
+            $scope.status = status;
+        });
     }
 }
 
