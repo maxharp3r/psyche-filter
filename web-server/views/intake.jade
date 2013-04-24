@@ -4,7 +4,7 @@ block stylesheets
   link(rel='stylesheet', href='/css/intake.css')
 
 block content
-  form.form-inline(ng-controller="IntakeCtrl", ng-submit='submitSurvey()')
+  form.form-inline(ng-controller="IntakeCtrl", ng-submit='')
 
     .row-fluid.page
       .span6.offset3
@@ -27,7 +27,7 @@ block content
           div(style="width:50%; margin-left:120px;")
             input.btn.btn-large.btn-block(type='button', value='next question', ng-click="scrollTo('page_01')")
 
-    .header#page_01 FOO: {{survey}}
+    .header#page_01
     .row-fluid.page
       .span4
         input.label-only#page_01_01(type='radio', ng-model='survey.01', value='1')
@@ -51,7 +51,7 @@ block content
         label.survey-button(for="page_01_06", ng-click="scrollTo('page_02')")
           img(src='img/01_06.png')
 
-    .header#page_02 FOO: {{survey}}
+    .header#page_02
     .row-fluid.page
       .span4
         input.label-only#page_02_01(type='radio', ng-model='survey.02', value='1')
@@ -75,7 +75,7 @@ block content
         label.survey-button(for="page_02_06", ng-click="scrollTo('page_03')")
           img(src='img/02_06.png')
 
-    .header#page_03 FOO: {{survey}}
+    .header#page_03
     .row-fluid.page
       .span6
         input.label-only#page_03_01(type='radio', ng-model='survey.03', value='1')
@@ -86,7 +86,7 @@ block content
         label.survey-button(for="page_03_02", ng-click="scrollTo('page_04')")
           img(src='img/03_02.png')
 
-    .header#page_04 FOO: {{survey}}
+    .header#page_04
     .row-fluid.page
       .span4
         input.label-only#page_04_01(type='radio', ng-model='survey.04', value='1')
@@ -110,7 +110,7 @@ block content
         label.survey-button(for="page_04_06", ng-click="scrollTo('page_05')")
           img(src='img/04_06.png')
 
-    .header#page_05 FOO: {{survey}}
+    .header#page_05
     .row-fluid.page
       .span4
         input.label-only#page_05_01(type='radio', ng-model='survey.05', value='1')
@@ -125,7 +125,7 @@ block content
         label.survey-button(for="page_05_03", ng-click="scrollTo('page_06')")
           img(src='img/05_03.png')
 
-    .header#page_06 FOO: {{survey}}
+    .header#page_06
     .row-fluid.page
       .span6
         input.label-only#page_06_01(type='radio', ng-model='survey.06', value='1')
@@ -136,7 +136,7 @@ block content
         label.survey-button(for="page_06_02", ng-click="scrollTo('page_07')")
           img(src='img/06_02.png')
 
-    .header#page_07 FOO: {{survey}}
+    .header#page_07
     .row-fluid.page
       .span4
         input.label-only#page_07_01(type='radio', ng-model='survey.07', value='1')
@@ -160,7 +160,7 @@ block content
         label.survey-button(for="page_07_06", ng-click="scrollTo('page_08')")
           img(src='img/07_06.png')
 
-    .header#page_08 FOO: {{survey}}
+    .header#page_08
     .row-fluid.page
       .span6
         input.label-only#page_08_01(type='radio', ng-model='survey.08', value='1')
@@ -183,7 +183,7 @@ block content
         label.survey-button(for="page_08_06", ng-click="scrollTo('page_09')")
           img(src='img/08_06.png')
 
-    .header#page_09 FOO: {{survey}}
+    .header#page_09
     .row-fluid.page
       .span4
         input.label-only#page_09_01(type='radio', ng-model='survey.09', value='1')
@@ -207,7 +207,7 @@ block content
         label.survey-button(for="page_09_06", ng-click="scrollTo('page_10')")
           img(src='img/09_06.png')
 
-    .header#page_10 FOO: {{survey}}
+    .header#page_10
     .row-fluid.page
       .span6
         input.label-only#page_10_01(type='radio', ng-model='survey.10', value='1')
@@ -218,7 +218,7 @@ block content
         label.survey-button(for="page_10_02", ng-click="scrollTo('page_11')")
           img(src='img/10_02.png')
 
-    .header#page_11 FOO: {{survey}}
+    .header#page_11
     .row-fluid.page
       .span6.offset2
         .survey-button
@@ -232,7 +232,7 @@ block content
         label.survey-button(for="page_11_02", ng-click="scrollTo('page_12')")
           img(src='img/down.png')
 
-    .header#page_12 FOO: {{survey}}
+    .header#page_12
     .row-fluid.page
       .span4
         input.label-only#page_12_01(type='radio', ng-model='survey.12', value='1')
@@ -247,7 +247,7 @@ block content
         label.survey-button(for="page_12_03", ng-click="scrollTo('page_13')")
           img(src='img/12_03.png')
 
-    .header#page_13 FOO: {{survey}}
+    .header#page_13
     .row-fluid.page
       .span4
         input.label-only#page_13_01(type='radio', ng-model='survey.13', value='1')
@@ -271,7 +271,7 @@ block content
         label.survey-button(for="page_13_06", ng-click="scrollTo('page_14')")
           img(src='img/13_06.png')
 
-    .header#page_14 FOO: {{survey}}
+    .header#page_14
     .row-fluid.page
       .span4
         input.label-only#page_14_01(type='radio', ng-model='survey.14', value='1')
@@ -295,7 +295,7 @@ block content
         label.survey-button(for="page_14_06", ng-click="scrollTo('page_15')")
           img(src='img/14_06.png')
 
-    .header#page_15 FOO: {{survey}}
+    .header#page_15
     .row-fluid.page
       .span6
         input.label-only#page_15_01(type='radio', ng-model='survey.15', value='1')
@@ -306,7 +306,7 @@ block content
         label.survey-button(for="page_15_02", ng-click="scrollTo('page_16')")
           img(src='img/15_02.png')
 
-    .header#page_16 FOO: {{survey}}
+    .header#page_16
     .row-fluid.page
       .span4
         input.label-only#page_16_01(type='radio', ng-model='survey.16', value='1')
@@ -330,7 +330,7 @@ block content
         label.survey-button(for="page_16_06", ng-click="scrollTo('page_17')")
           img(src='img/16_06.png')
 
-    .header#page_17 FOO: {{survey}}
+    .header#page_17
     .row-fluid.page
       .span6.offset2
         .survey-button
@@ -350,7 +350,7 @@ block content
         label.survey-button.textlabel(for="page_17_04", ng-click="scrollTo('page_18')")
           img(src='img/17_05.png')
 
-    .header#page_18 FOO: {{survey}}
+    .header#page_18
     .row-fluid.page
       .span4
         input.label-only#page_18_01(type='radio', ng-model='survey.18', value='1')
@@ -374,7 +374,7 @@ block content
         label.survey-button(for="page_18_06", ng-click="scrollTo('page_19')")
           img(src='img/18_06.png')
 
-    .header#page_19 FOO: {{survey}}
+    .header#page_19
     .row-fluid.page
       .span4
         input.label-only#page_19_01(type='radio', ng-model='survey.19', value='1')
@@ -398,7 +398,7 @@ block content
         label.survey-button(for="page_19_06", ng-click="scrollTo('page_20')")
           img(src='img/19_06.png')
 
-    .header#page_20 FOO: {{survey}}
+    .header#page_20
     .row-fluid.page
       .span6.offset2
         .survey-button
@@ -412,7 +412,7 @@ block content
         label.survey-button(for="page_20_02", ng-click="scrollTo('page_21')")
           img(src='img/down.png')
 
-    .header#page_21 FOO: {{survey}}
+    .header#page_21
     .row-fluid.page
       .span4
         input.label-only#page_21_01(type='radio', ng-model='survey.21', value='1')
@@ -436,7 +436,7 @@ block content
         label.survey-button(for="page_21_06", ng-click="scrollTo('page_22')")
           img(src='img/21_06.png')
 
-    .header#page_22 FOO: {{survey}}
+    .header#page_22
     .row-fluid.page
       .span6.offset2
         .survey-button
@@ -450,7 +450,7 @@ block content
         label.survey-button(for="page_22_02", ng-click="scrollTo('page_23')")
           img(src='img/down.png')
 
-    .header#page_23 FOO: {{survey}}
+    .header#page_23
     .row-fluid.page
       .span4
         input.label-only#page_23_01(type='radio', ng-model='survey.23', value='1')
@@ -474,7 +474,7 @@ block content
         label.survey-button(for="page_23_06", ng-click="scrollTo('page_24')")
           img(src='img/23_06.png')
 
-    .header#page_24 FOO: {{survey}}
+    .header#page_24
     .row-fluid.page
       .span4
         input.label-only#page_24_01(type='radio', ng-model='survey.24', value='1')
@@ -498,7 +498,7 @@ block content
         label.survey-button(for="page_24_06", ng-click="scrollTo('page_25')")
           img(src='img/24_06.png')
 
-    .header#page_25 FOO: {{survey}}
+    .header#page_25
     .row-fluid.page
       .span6.offset2
         .survey-button
@@ -512,9 +512,10 @@ block content
         label.survey-button(for="page_25_02", ng-click="scrollTo('page_done')")
           img(src='img/down.png')
 
-    .row-fluid.page#page_done
+    .header#page_done // results: {{survey}}
+    .row-fluid.page
       .span6.offset3
-        .big-button(ng-click="alert('done')")
+        .big-button(ng-click="submitSurvey()")
           .text thank you
           .text {{survey.name}}
           div(style="margin-bottom:.5em")
