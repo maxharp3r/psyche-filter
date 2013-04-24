@@ -4,7 +4,8 @@ block stylesheets
   link(rel='stylesheet', href='/css/intake.css')
 
 block content
-  form.form-inline(ng-controller="IntakeCtrl", ng-submit='')
+  div#top
+  form.form-inline(ng-controller="IntakeCtrl", ng-submit="scrollTo('page_01')")
 
     .row-fluid.page
       .span6.offset3
@@ -506,16 +507,16 @@ block content
       .span2.offset1
         div(style="margin-top:60px")
         input.label-only#page_25_01(type='radio', ng-model='survey.25', value='1')
-        label.survey-button(for="page_25_01", ng-click="scrollTo('page_done')")
+        label.survey-button(for="page_25_01", ng-click="scrollTo('page_done'); finish()")
           img(src='img/up.png')
         input.label-only#page_25_02(type='radio', ng-model='survey.25', value='2')
-        label.survey-button(for="page_25_02", ng-click="scrollTo('page_done')")
+        label.survey-button(for="page_25_02", ng-click="scrollTo('page_done'); finish()")
           img(src='img/down.png')
 
     .header#page_done // results: {{survey}}
     .row-fluid.page
       .span6.offset3
-        .big-button(ng-click="submitSurvey()")
+        .big-button(ng-click="")
           .text thank you
           .text {{survey.name}}
           div(style="margin-bottom:.5em")

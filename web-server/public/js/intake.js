@@ -15,6 +15,14 @@ function IntakeCtrl($scope, $http, $location, $anchorScroll) {
         $anchorScroll();
     }
 
+    $scope.finish = function() {
+        $scope.submitSurvey();
+        setTimeout(function() {
+            $scope.scrollTo('top');
+            $scope.survey = {};
+        }, 5000);
+    }
+
     $scope.submitSurvey = function() {
         console.log("process survey", $scope.survey);
     }
