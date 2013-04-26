@@ -19,8 +19,8 @@ div.header {
     font-size: .25em;
 }
 
-div.spacer {
-    height: 50px;
+.hidden {
+    display: none;
 }
 
 input.huge {
@@ -42,7 +42,7 @@ div.big-button {
     text-shadow: 5px 5px 10px #666;
     cursor: hand; cursor: pointer;
     margin-top:100px;
-    padding: 1em 0;
+    padding: 1em 20px;
 }
 div.big-button div.title { font-size: 2.5em; }
 div.big-button div.text { font-size: 1em; line-height: 1.2; }

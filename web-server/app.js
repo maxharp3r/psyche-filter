@@ -36,25 +36,6 @@ redisClient.on("error", function (err) {
     console.log("Error " + err);
 });
 
-app.post('/surveys/new', function(req, res) {
-    var survey_data = req.body;
-    console.log("survey_data:", survey_data);
-    if (!survey_data) {
-        res.json({"failure": "empty body"});
-        return;
-    }
-
-    var name = survey_data["name"] || "_";
-    var words = scorer.survey_to_word_list(survey_data);
-
-    // put the thing to redis
-    redisClient.hset("cube:surveys", name.toLowerCase(), words, function (err, reply) {
-        if (err) { console.log("Error " + err); }
-        console.log("Set survey data for " + name);
-        res.json({'success': true});
-    });
-});
-app.get('/:name', routes.render_jade);
 
 var server = http.createServer(app).listen(config.bind.port, config.bind.host, function () {
     console.log("Express server listening on http://" + config.bind.host + ":" + config.bind.port + "/");
@@ -77,4 +58,53 @@ io.sockets.on('connection', function (socket) {
     });
 
 });
+
+
+app.post('/surveys/new', function(req, res) {
+    var survey_data = req.body;
+    console.log("survey_data:", survey_data);
+    if (!survey_data) {
+        res.json({"failure": "empty body"});
+        return;
+    }
+
+    var name = survey_data["name"] || "_";
+    var words = scorer.survey_to_word_list(survey_data);
+
+    // put the thing to redis
+    redisClient.hset("cube:surveys", name.toLowerCase(), words, function (err, reply) {
+        if (err) {
+            console.log("Error " + err);
+            res.json({'success': false});
+            return;
+        }
+        console.log("Set survey data for " + name);
+        res.json({'success': true});
+    });
+});
+
+app.post('/cube/start', function(req, res) {
+    console.log("someone is entering the cube: ", req.body);
+    var name = req.body.name;
+    if (!name) {
+        res.json({"failure": "empty body"});
+        return;
+    }
+
+    // put the thing to redis
+    redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply) {
+        if (err || !reply) {
+            console.log("Error " + err);
+            res.json({'success': false});
+            return;
+        }
+        console.log("Found survey data for " + name);
+        console.log("Words:", reply);
+
+        io.sockets.emit('EVENT:start');
+
+        res.json({'success': true});
+    });
+});
+app.get('/:name', routes.render_jade);
 
