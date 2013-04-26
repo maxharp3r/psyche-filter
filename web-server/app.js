@@ -2,6 +2,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var redis = require("redis");
 
 // local dependencies
 var config = require('./config.json');
@@ -30,10 +31,28 @@ app.configure('development', function() {
     app.locals.pretty = true;
 });
 
+var redisClient = redis.createClient();
+redisClient.on("error", function (err) {
+    console.log("Error " + err);
+});
+
 app.post('/surveys/new', function(req, res) {
-    console.log("body:", req.body);
-    scorer.survey_to_word_list(req.body);
-    res.json({'success': true});
+    var survey_data = req.body;
+    console.log("survey_data:", survey_data);
+    if (!survey_data) {
+        res.json({"failure": "empty body"});
+        return;
+    }
+
+    var name = survey_data["name"] || "_";
+    var words = scorer.survey_to_word_list(survey_data);
+
+    // put the thing to redis
+    redisClient.hset("cube:surveys", name.toLowerCase(), words, function (err, reply) {
+        if (err) { console.log("Error " + err); }
+        console.log("Set survey data for " + name);
+        res.json({'success': true});
+    });
 });
 app.get('/:name', routes.render_jade);
 
