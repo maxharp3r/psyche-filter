@@ -26,6 +26,10 @@ BLACK.all_on = function() {
     $('.spotlight').addClass('on');
 }
 
+BLACK.entry_on = function() {
+    $('#entry-light').addClass('on');
+}
+
 BLACK.all_off = function() {
     $('.spotlight').removeClass('on');
 }

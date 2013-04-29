@@ -5,23 +5,24 @@ block content
   h1 a control panel
 
   div(ng-controller="SocketCtrl")
-    input.btn-primary(type='button', value='reload browser windows', ng-click='emit_reload()')
+    input.btn(type='button', value='reload browser windows', ng-click='emit_reload()')
     hr
 
-    form(ng-submit='emit_words()')
+    form.form-inline(ng-submit='emit_words()')
       label words (comma-delimited):
       input(type='text', ng-model='controls.words', placeholder='Enter a name here')
       // | text input: {{controls.words}}
-      input.btn-primary(type='button', value='emit', ng-click='emit_words()')
-    hr
+      input.btn(type='button', value='emit', ng-click='emit_words()')
+      hr
 
-    input.btn-primary(type='button', value='all on', ng-click='emit_all_on()')
-    input.btn-primary(type='button', value='all off', ng-click='emit_all_off()')
-    hr
+      input.btn(type='button', value='all on', ng-click='emit_all_on()')
+      input.btn(type='button', value='all off', ng-click='emit_all_off()')
+      input.btn(type='button', value='entry light on', ng-click='emit_entry_on()')
+      hr
 
-    input.btn-primary(type='button', value='debug on', ng-click='emit_debug_on()')
-    input.btn-primary(type='button', value='debug off', ng-click='emit_debug_off()')
-    hr
+      input.btn(type='button', value='debug on', ng-click='emit_debug_on()')
+      input.btn(type='button', value='debug off', ng-click='emit_debug_off()')
+      hr
 
 
 
