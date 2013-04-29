@@ -101,7 +101,11 @@ app.post('/cube/start', function(req, res) {
         console.log("Found survey data for " + name);
         console.log("Words:", reply);
 
-        io.sockets.emit('EVENT:start');
+        io.sockets.emit('EVENT:begin');
+
+        setTimeout(function() {
+            io.sockets.emit('EVENT:end');
+        }, 2000);
 
         res.json({'success': true});
     });

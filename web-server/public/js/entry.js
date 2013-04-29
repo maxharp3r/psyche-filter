@@ -14,7 +14,7 @@ function EntryCtrl($scope, $http, $location, $anchorScroll) {
             $scope.data = data;
 
             if (data["success"]) {
-                // good, start the show
+                // good, socket.io will start the show (see EVENT:begin)
             } else {
                 // bad, show a message
                 $scope.status.badname = true;
@@ -33,8 +33,18 @@ function EntryCtrl($scope, $http, $location, $anchorScroll) {
 
     var socket = io.connect(CONFIG.server_addr);
 
-    socket.on('EVENT:start', function () {
-        console.log("on EVENT:start");
+    socket.on('EVENT:begin', function () {
+        console.log("on EVENT:begin");
+        $scope.entry = {};
+        $scope.status.started = true;
+        $scope.$apply();
     });
+
+    socket.on('EVENT:end', function () {
+        console.log("on EVENT:end");
+        $scope.status.started = false;
+        $scope.$apply();
+    });
+
 }
 
