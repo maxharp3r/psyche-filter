@@ -52,6 +52,13 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('CMD:words', words);
     });
 
+    socket.on('CMD:name', function (name) {
+        console.log("on CMD:name", name);
+        redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply) {
+            cube_routine(reply);
+        });
+    });
+
     socket.on('CMD:control', function (cmd) {
         console.log("on CMD:control", cmd);
         io.sockets.emit('CMD:control', cmd);
@@ -83,6 +90,7 @@ app.post('/surveys/new', function(req, res) {
     });
 });
 
+
 app.post('/cube/start', function(req, res) {
     console.log("someone is entering the cube: ", req.body);
     var name = req.body.name;
@@ -91,7 +99,6 @@ app.post('/cube/start', function(req, res) {
         return;
     }
 
-    // put the thing to redis
     redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply) {
         if (err || !reply) {
             console.log("Error " + err);
@@ -99,16 +106,26 @@ app.post('/cube/start', function(req, res) {
             return;
         }
         console.log("Found survey data for " + name);
-        console.log("Words:", reply);
-
-        io.sockets.emit('EVENT:begin');
-
-        setTimeout(function() {
-            io.sockets.emit('EVENT:end');
-        }, 2000);
-
+        cube_routine(reply);
         res.json({'success': true});
     });
 });
 app.get('/:name', routes.render_jade);
+
+var cube_routine = function(words) {
+    // entry blocked, spotlight on
+    io.sockets.emit('EVENT:begin');
+
+    // show words
+    setTimeout(function() {
+        console.log("emitting words:", words);
+        io.sockets.emit('CMD:words', words);
+    }, 1000);
+
+    // entry available
+    setTimeout(function() {
+        io.sockets.emit('EVENT:end');
+    }, 15000);
+}
+
 

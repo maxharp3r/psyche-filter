@@ -10,10 +10,15 @@ block content
 
     form.form-inline(ng-submit='emit_words()')
       label words (comma-delimited):
-      input(type='text', ng-model='controls.words', placeholder='Enter a name here')
-      // | text input: {{controls.words}}
+      input(type='text', ng-model='controls.words', placeholder='one,two,three')
       input.btn(type='button', value='emit', ng-click='emit_words()')
       hr
+
+      label name:
+      input(type='text', ng-model='controls.name', placeholder='user name')
+      input.btn(type='button', value='emit', ng-click='submit_name()')
+      hr
+
 
       input.btn(type='button', value='all on', ng-click='emit_all_on()')
       input.btn(type='button', value='all off', ng-click='emit_all_off()')

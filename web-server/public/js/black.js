@@ -27,12 +27,12 @@ BLACK.all_on = function() {
 }
 
 BLACK.entry_on = function() {
-    $('.spotlight').removeClass('on');
+    BLACK.all_off()
     $('#entry-light').addClass('on');
 }
 
 BLACK.exit_on = function() {
-    $('.spotlight').removeClass('on');
+    BLACK.all_off()
     $('#exit').addClass('on');
 }
 
@@ -90,3 +90,15 @@ BLACK.socket.on('CMD:control', function (cmd) {
         console.warn("unexpected cmd: ", cmd);
     }
 });
+
+BLACK.socket.on('EVENT:begin', function (cmd) {
+    console.log("on EVENT:begin", cmd);
+    BLACK.entry_on();
+});
+
+BLACK.socket.on('EVENT:end', function (cmd) {
+    console.log("on EVENT:end", cmd);
+    BLACK.all_off();
+});
+
+

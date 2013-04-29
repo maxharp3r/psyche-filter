@@ -10,9 +10,14 @@ function SocketCtrl($scope) {
     CONTROLS.socket.emit('CMD:words', $scope.controls.words);
   }
 
+  $scope.submit_name = function() {
+    console.log("emit CMD:words", $scope.controls.name);
+    CONTROLS.socket.emit('CMD:name', $scope.controls.name);
+  }
+
   _emit_cmd = function(cmd) {
-      console.log("emit CMD:control", cmd);
-      CONTROLS.socket.emit('CMD:control', cmd);
+    console.log("emit CMD:control", cmd);
+    CONTROLS.socket.emit('CMD:control', cmd);
   }
 
   $scope.emit_all_on = function() { _emit_cmd('all_on'); }
