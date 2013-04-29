@@ -46,5 +46,12 @@ function EntryCtrl($scope, $http, $location, $anchorScroll) {
         $scope.$apply();
     });
 
+    socket.on('CMD:control', function (cmd) {
+        console.log("on CMD:control", cmd);
+        if (cmd === "reload") {
+            window.location.reload(true);
+        }
+    });
+
 }
 
