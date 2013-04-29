@@ -27,7 +27,13 @@ BLACK.all_on = function() {
 }
 
 BLACK.entry_on = function() {
+    $('.spotlight').removeClass('on');
     $('#entry-light').addClass('on');
+}
+
+BLACK.exit_on = function() {
+    $('.spotlight').removeClass('on');
+    $('#exit').addClass('on');
 }
 
 BLACK.all_off = function() {
