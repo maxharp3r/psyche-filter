@@ -27,7 +27,7 @@ function IntakeCtrl($scope, $http, $location, $anchorScroll) {
         console.log("process survey", $scope.survey);
 
         $http({
-            url: CONFIG.server_addr + "/surveys/new",
+            url: CONFIG.wireless_addr + "/surveys/new",
             method: "POST",
             data: $scope.survey
         }).success(function(data, status, headers, config) {

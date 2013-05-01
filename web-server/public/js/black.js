@@ -74,7 +74,7 @@ BLACK.go = function(words) {
 
 };
 
-BLACK.socket = io.connect(CONFIG.server_addr);
+BLACK.socket = io.connect(CONFIG.wired_addr);
 
 BLACK.socket.on('CMD:words', function (words) {
     console.log("on CMD:words", words);

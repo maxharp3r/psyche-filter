@@ -1,4 +1,5 @@
 
 var CONFIG = {};
 
-CONFIG.server_addr = 'http://192.168.0.5:5500';
+CONFIG.wireless_addr = 'http://192.168.70.1:5500';
+CONFIG.wired_addr = 'http://192.168.71.1:5500';

@@ -1,7 +1,7 @@
 
 var CONTROLS = {};
 
-CONTROLS.socket = io.connect(CONFIG.server_addr);
+CONTROLS.socket = io.connect(CONFIG.wired_addr);
 
 function SocketCtrl($scope) {
 

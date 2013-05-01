@@ -7,7 +7,7 @@ function EntryCtrl($scope, $http, $location, $anchorScroll) {
         console.log("submit name", $scope.entry);
 
         $http({
-            url: CONFIG.server_addr + "/cube/start",
+            url: CONFIG.wireless_addr + "/cube/start",
             method: "POST",
             data: $scope.entry
         }).success(function(data, status, headers, config) {
@@ -31,7 +31,7 @@ function EntryCtrl($scope, $http, $location, $anchorScroll) {
         });
     }
 
-    var socket = io.connect(CONFIG.server_addr);
+    var socket = io.connect(CONFIG.wireless_addr);
 
     socket.on('EVENT:begin', function () {
         console.log("on EVENT:begin");
