@@ -1,13 +1,19 @@
 // external dependencies
+var exec = require('child_process').exec;
 var express = require('express');
 var http = require('http');
 var path = require('path');
 var redis = require("redis");
+var sys = require('sys')
+
 
 // local dependencies
 var config = require('./config.json');
 var routes = require('./src/routes');
 var scorer = require('./src/scorer');
+
+// for running command-line
+function outstream(error, stdout, stderr) { sys.puts(stdout) }
 
 var app = express();
 app.configure(function(){
@@ -116,6 +122,8 @@ var cube_routine = function(words) {
     // entry blocked, spotlight on
     io.sockets.emit('EVENT:begin');
 
+    exec("afplay data/test_sound.mp3", outstream);
+
     // show words
     setTimeout(function() {
         console.log("emitting words:", words);
@@ -127,5 +135,3 @@ var cube_routine = function(words) {
         io.sockets.emit('EVENT:end');
     }, 15000);
 }
-
-
