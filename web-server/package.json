@@ -16,6 +16,8 @@
         "underscore": "1.4.4"
     },
     "devDependencies": {
+        "ent": "*",
+        "htmlparser": "*",
         "supervisor": "~0.4.1"
     }
 }
