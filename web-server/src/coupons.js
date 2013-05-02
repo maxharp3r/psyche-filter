@@ -33,7 +33,7 @@ var fetchUrl = function(url, callback) {
 }
 
 // parser for the "description" field - get matcher group 2 for data
-var BODY_REGEX = /\!\[CDATA\[Coupon Expiration:.*?(2013|Date).(.*)\]\]/;
+var BODY_REGEX = /\!\[CDATA\[Coupon Expiration:.*?(\d{4}|Date).(.*)\]\]/;
 
 var parseRss = function(xml) {
     var rssHandler = new htmlparser.RssHandler(function (error, dom) {
@@ -46,14 +46,16 @@ var parseRss = function(xml) {
 
             dom.items.forEach(function (item, index) {
                 console.log("title: ", ent.decode(item.title));
+
+                var description = ent.decode(item.description);
+                var result = description.match(BODY_REGEX);
+                if (result && result[2]) {
+                    var cleanDescription = result[2];
+                    console.log("description: ", cleanDescription);
+                }
+
                 console.log("link: ", ent.decode(item.link));
-                console.log("date: ", item.pubDate);
-
-//                var description = ent.decode(item.description);
-//                var result = description.match(BODY_REGEX);
-//                var cleanDescription = result[2];
-//                console.log("description: ", cleanDescription);
-
+                // console.log("date: ", item.pubDate);
                 console.log("--");
             });
 
