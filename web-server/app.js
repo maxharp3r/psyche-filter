@@ -60,8 +60,8 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('CMD:name', function (name) {
         console.log("on CMD:name", name);
-        redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply) {
-            cube_routine(reply);
+        redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply_str) {
+            cube_routine(JSON.parse(reply_str));
         });
     });
 
@@ -85,7 +85,7 @@ app.post('/surveys/new', function(req, res) {
     var survey_scores = scorer.survey_to_word_list(survey_data);
 
     // put the words to redis
-    redisClient.hset("cube:surveys", name.toLowerCase(), survey_scores, function(err, reply) {
+    redisClient.hset("cube:surveys", name.toLowerCase(), JSON.stringify(survey_scores), function(err, reply) {
         if (err) {
             console.log("Error " + err);
             return;
@@ -125,14 +125,15 @@ app.post('/cube/start', function(req, res) {
         return;
     }
 
-    redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply) {
-        if (err || !reply) {
+    redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply_str) {
+        if (err || !reply_str) {
             console.log("Error " + err);
             res.json({'success': false});
             return;
         }
         console.log("Found survey data for " + name);
 
+        var reply = JSON.parse(reply_str);
         var words = reply['words'];
         var top_category = reply['top_category'];
         cube_routine(words, top_category);
