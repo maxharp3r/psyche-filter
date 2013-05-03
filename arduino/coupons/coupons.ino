@@ -29,7 +29,7 @@ static uint8_t ip[] = { 192, 168, 71, 3 };
 #define PREFIX ""
 WebServer webserver(PREFIX, 80);
 #define NAMELEN 32
-#define VALUELEN 512
+#define VALUELEN 256
 
 
 // printer setup
@@ -62,20 +62,19 @@ void couponCmd(WebServer &server, WebServer::ConnectionType type, char *, bool) 
   char value[VALUELEN];
   server.httpSuccess();
   server.printP(couponMsg);
-//  while (server.readPOSTparam(name, NAMELEN, value, VALUELEN)) {
-//    server.print("\n");
-//    server.print(name);
-//    server.print(" =>");
-//    server.print(value);
-//    server.print("\n");
-//  }
   
-  // test print
   printer.wake();
   printer.setDefault();
   while (server.readPOSTparam(name, NAMELEN, value, VALUELEN)) {
-    printer.println(value);
-    printer.feed(2);
+    Serial.print("found post param: ");
+    Serial.println(name);
+    if (strncmp(name, "word", 4) == 0) {
+      printer.print(value);
+      printer.print(" ");
+    } else {
+      printer.println(value);
+      printer.feed(2);
+    }
   }
   printer.feed(2);
   printer.sleep();

@@ -148,13 +148,14 @@ app.post('/cube/start', function(req, res) {
 app.get('/:name', routes.render_jade);
 
 var printer_routine = function(name, words, coupon) {
-
     var coupon_str = coupon['title'] + "\n" + coupon['description'] + "\nvisit " + coupon['link'];
 
     var post_data = querystring.stringify({
         'msg1': 'Profile Cube Results',
         'head': 'profile: ' + name,
-        'words': words.toString(),
+        'word': words.slice(0, -1),
+        'lastword': words.slice(-1),
+        'linefeed': '',
         'msg2': 'Here is a personalized coupon for you, ' + name + ":",
         'coupon': coupon_str
     });
