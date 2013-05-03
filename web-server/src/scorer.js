@@ -164,7 +164,10 @@ exports.survey_to_word_list = function(survey_results) {
     }, {});
     // console.log(cats_count);
 
-    // return value
+    var top_category = _.max(_.keys(cats_count), function (key) { return cats_count[key]; });
+    // console.log("top_category: ", top_category);
+
+    // list of words to light up
     var the_words = [];
 
     // find the top cat from each super-category
@@ -179,9 +182,13 @@ exports.survey_to_word_list = function(survey_results) {
         // append the words
         the_words = the_words.concat(CATS_TO_WORDS[best_cat]);
     });
-    console.log("the words", the_words);
+    // console.log("the words", the_words);
 
-    return the_words;
+    var survey_scores = {
+        'words': the_words,
+        'top_category': top_category
+    }
+    return survey_scores;
 };
 
 

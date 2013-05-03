@@ -75,25 +75,45 @@ io.sockets.on('connection', function (socket) {
 
 app.post('/surveys/new', function(req, res) {
     var survey_data = req.body;
-    console.log("survey_data:", survey_data);
+    // console.log("survey_data:", survey_data);
     if (!survey_data) {
         res.json({"failure": "empty body"});
         return;
     }
 
     var name = survey_data["name"] || "_";
-    var words = scorer.survey_to_word_list(survey_data);
+    var survey_scores = scorer.survey_to_word_list(survey_data);
 
-    // put the thing to redis
-    redisClient.hset("cube:surveys", name.toLowerCase(), words, function (err, reply) {
+    // put the words to redis
+    redisClient.hset("cube:surveys", name.toLowerCase(), survey_scores, function(err, reply) {
         if (err) {
             console.log("Error " + err);
-            res.json({'success': false});
             return;
         }
         console.log("Set survey data for " + name);
         res.json({'success': true});
     });
+
+    // find a coupon to put
+    redisClient.srandmember("cube:coupons:cats:" + survey_scores['top_category'], function(err, reply) {
+        if (err) {
+            console.log("Error in getting coupon " + err);
+            return;
+        }
+        if (!reply) {
+            console.log("Could not find a coupon for category " + survey_scores['top_category'] + ", exiting");
+            return;
+        }
+        console.log("found coupon for user " + name);
+        redisClient.hset("cube:coupons:users", name.toLowerCase(), reply, function(err, reply) {
+            if (err) {
+                console.log("Error in setting coupon " + err);
+                return;
+            }
+            console.log("stored coupon for user " + name);
+        });
+    });
+    res.json({'success': true});
 });
 
 
@@ -112,13 +132,16 @@ app.post('/cube/start', function(req, res) {
             return;
         }
         console.log("Found survey data for " + name);
-        cube_routine(reply);
+
+        var words = reply['words'];
+        var top_category = reply['top_category'];
+        cube_routine(words, top_category);
         res.json({'success': true});
     });
 });
 app.get('/:name', routes.render_jade);
 
-var cube_routine = function(words) {
+var cube_routine = function(words, top_category) {
     // entry blocked, spotlight on
     io.sockets.emit('EVENT:begin');
 
