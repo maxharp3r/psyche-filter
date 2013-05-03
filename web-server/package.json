@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "start": "supervisor --no-restart-on error --extensions 'node|js|json|jade|less' app.js",
+        "start": "supervisor --extensions 'node|js|json|jade|less' app.js",
         "test": "mocha -w"
     },
     "dependencies": {
