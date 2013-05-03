@@ -58,7 +58,7 @@ BLACK.go = function(words) {
     BLACK.all_off()
 
     var word_set = {}
-    _.each(words.split(","), function(word) { word_set[word.trim()] = true; });
+    _.each(words, function(word) { word_set[word.trim()] = true; });
 
     _.each(BLACK.ids, function(id, idx) {
         var time = BLACK.DELAY_MS * idx;

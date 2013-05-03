@@ -61,7 +61,8 @@ io.sockets.on('connection', function (socket) {
     socket.on('CMD:name', function (name) {
         console.log("on CMD:name", name);
         redisClient.hget("cube:surveys", name.toLowerCase(), function (err, reply_str) {
-            cube_routine(JSON.parse(reply_str));
+            var scores = JSON.parse(reply_str);
+            cube_routine(name, scores['words'], scores['top_category']);
         });
     });
 
@@ -136,13 +137,33 @@ app.post('/cube/start', function(req, res) {
         var reply = JSON.parse(reply_str);
         var words = reply['words'];
         var top_category = reply['top_category'];
-        cube_routine(words, top_category);
+        cube_routine(name.toLowerCase(), words, top_category);
         res.json({'success': true});
     });
 });
 app.get('/:name', routes.render_jade);
 
-var cube_routine = function(words, top_category) {
+var printer_routine = function(name, words, coupon) {
+    console.log("==============");
+    console.log("COUPON for " + name);
+    console.log("Your profile words are: " + words);
+    console.log("Your personalized coupon is: " + coupon['title'] + "\n" + coupon['description'] + "\nvisit "
+            + coupon['link']);
+    console.log("==============");
+}
+
+var cube_routine = function(name, words, top_category) {
+    // start fetching the coupon, it will be ready when we initate the printer
+    var coupon = undefined;
+    redisClient.hget("cube:coupons:users", name.toLowerCase(), function (err, reply_str) {
+        if (err) {
+            console.log("Error fetching user coupon for " + name + err);
+            return;
+        }
+        console.log("Fetched coupon data for " + name);
+        coupon = JSON.parse(reply_str);
+    });
+
     // entry blocked, spotlight on
     io.sockets.emit('EVENT:begin');
 
@@ -150,8 +171,14 @@ var cube_routine = function(words, top_category) {
 
     // show words
     setTimeout(function() {
-        console.log("emitting words:", words);
+        console.log("emitting words:", JSON.stringify(words));
         io.sockets.emit('CMD:words', words);
+    }, 1000);
+
+    // print
+    setTimeout(function() {
+        console.log("printing...");
+        printer_routine(name, words, coupon);
     }, 1000);
 
     // entry available
