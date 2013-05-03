@@ -3,9 +3,9 @@ var exec = require('child_process').exec;
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var querystring = require('querystring');
 var redis = require("redis");
 var sys = require('sys')
-
 
 // local dependencies
 var config = require('./config.json');
@@ -14,6 +14,10 @@ var scorer = require('./src/scorer');
 
 // for running command-line
 function outstream(error, stdout, stderr) { sys.puts(stdout) }
+
+if (!config.printer) {
+    throw "need to configure printer settings in config.json";
+}
 
 var app = express();
 app.configure(function(){
@@ -144,12 +148,39 @@ app.post('/cube/start', function(req, res) {
 app.get('/:name', routes.render_jade);
 
 var printer_routine = function(name, words, coupon) {
-    console.log("==============");
-    console.log("COUPON for " + name);
-    console.log("Your profile words are: " + words);
-    console.log("Your personalized coupon is: " + coupon['title'] + "\n" + coupon['description'] + "\nvisit "
-            + coupon['link']);
-    console.log("==============");
+
+    var coupon_str = coupon['title'] + "\n" + coupon['description'] + "\nvisit " + coupon['link'];
+
+    var post_data = querystring.stringify({
+        'msg1': 'Profile Cube Results',
+        'head': 'profile: ' + name,
+        'words': words.toString(),
+        'msg2': 'Here is a personalized coupon for you, ' + name + ":",
+        'coupon': coupon_str
+    });
+    console.log("coupon:");
+    console.log(post_data);
+
+    var post_options = {
+        host: config.printer.host,
+        path: config.printer.path,
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': post_data.length
+        }
+    };
+
+    var post_req = http.request(post_options, function(res) {
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('Response: ' + chunk);
+        });
+    });
+
+    // write parameters to post body
+    post_req.write(post_data);
+    post_req.end();
 }
 
 var cube_routine = function(name, words, top_category) {
