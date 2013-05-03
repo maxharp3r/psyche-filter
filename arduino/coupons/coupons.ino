@@ -2,7 +2,7 @@
 
  Web_HelloWorld.pde - very simple Webduino example 
 
- curl -X POST --data "text=here is a nifty coupon" http://192.168.0.38/c
+ curl -X POST --data "text=here is a nifty coupon" http://192.168.71.3/c
  
  Docs:
  * https://github.com/sirleech/Webduino/
@@ -10,6 +10,8 @@
      * http://learn.adafruit.com/mini-thermal-receipt-printer/
  * wiring
      * http://bildr.org/2011/08/thermal-printer-arduino/
+ * form url encoding
+     * https://en.wikipedia.org/wiki/POST_(HTTP)
  */
 
 #include "SPI.h"
@@ -23,11 +25,11 @@
 
 // web server setup
 static uint8_t mac[] = { 0x90, 0xA2, 0xDA, 0x0D, 0xA7, 0x3D };
-static uint8_t ip[] = { 192, 168, 0, 38 };
+static uint8_t ip[] = { 192, 168, 71, 3 };
 #define PREFIX ""
 WebServer webserver(PREFIX, 80);
 #define NAMELEN 32
-#define VALUELEN 256
+#define VALUELEN 512
 
 
 // printer setup
@@ -60,18 +62,21 @@ void couponCmd(WebServer &server, WebServer::ConnectionType type, char *, bool) 
   char value[VALUELEN];
   server.httpSuccess();
   server.printP(couponMsg);
-  while (server.readPOSTparam(name, NAMELEN, value, VALUELEN)) {
-    server.print("\n");
-    server.print(name);
-    server.print(" =>");
-    server.print(value);
-    server.print("\n");
-  }
+//  while (server.readPOSTparam(name, NAMELEN, value, VALUELEN)) {
+//    server.print("\n");
+//    server.print(name);
+//    server.print(" =>");
+//    server.print(value);
+//    server.print("\n");
+//  }
   
   // test print
   printer.wake();
   printer.setDefault();
-  printer.println("hello, world!");
+  while (server.readPOSTparam(name, NAMELEN, value, VALUELEN)) {
+    printer.println(value);
+    printer.feed(2);
+  }
   printer.feed(2);
   printer.sleep();
 }
