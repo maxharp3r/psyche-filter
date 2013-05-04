@@ -151,12 +151,12 @@ var printer_routine = function(name, words, coupon) {
     var coupon_str = coupon['title'] + "\n" + coupon['description'] + "\nvisit " + coupon['link'];
 
     var post_data = querystring.stringify({
-        'msg1': 'Profile Cube Results',
-        'head': 'profile: ' + name,
+        'inverse': 'Profile Cube',
+        'large': name,
         'word': words.slice(0, -1),
         'lastword': words.slice(-1),
         'linefeed': '',
-        'msg2': 'Here is a personalized coupon for you, ' + name + ":",
+        'msg2': 'Profile Cube ValueFeed(tm):',
         'coupon': coupon_str
     });
     console.log("coupon:");
