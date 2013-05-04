@@ -7,7 +7,8 @@ function SocketCtrl($scope) {
 
   $scope.emit_words = function() {
     console.log("emit CMD:words", $scope.controls.words);
-    CONTROLS.socket.emit('CMD:words', $scope.controls.words);
+    var words_array = $scope.controls.words.split(',');
+    CONTROLS.socket.emit('CMD:words', words_array);
   }
 
   $scope.submit_name = function() {
