@@ -198,23 +198,39 @@ var cube_routine = function(name, words, top_category) {
 
     // entry blocked, spotlight on
     io.sockets.emit('EVENT:begin');
+    exec("say enter the profile cube and please shut the door behind you", outstream);
 
-    exec("afplay data/test_sound.mp3", outstream);
+    // print (need delay to give redis a chance to find something)
+    setTimeout(function() {
+        console.log("printing...");
+        if (coupon) {
+            console.log("found a coupon");
+            printer_routine(name, words, coupon);
+        }
+    }, 1000);
 
     // show words
     setTimeout(function() {
         console.log("emitting words:", JSON.stringify(words));
         io.sockets.emit('CMD:words', words);
-    }, 1000);
+        // exec("afplay data/test_sound.mp3", outstream);
+    }, 10000);
 
-    // print
+    // all on
     setTimeout(function() {
-        console.log("printing...");
-        printer_routine(name, words, coupon);
-    }, 1000);
+        console.log("all on");
+        io.sockets.emit('CMD:control', 'all_on');
+    }, 50000);
+
+    // exit
+    setTimeout(function() {
+        console.log("exit on");
+        io.sockets.emit('CMD:control', 'exit_on');
+        exec("afplay data/ding.wav; say please exit the profile cube and pick up your receipt to the right", outstream);
+    }, 55000);
 
     // entry available
     setTimeout(function() {
         io.sockets.emit('EVENT:end');
-    }, 15000);
+    }, 60000);
 }
