@@ -4,3 +4,4 @@
 *.swp
 node_modules
 config.json
+web-server/data/.~lock.cube-words.csv#
