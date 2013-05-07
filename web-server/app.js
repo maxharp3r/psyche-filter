@@ -213,24 +213,24 @@ var cube_routine = function(name, words, top_category) {
     setTimeout(function() {
         console.log("emitting words:", JSON.stringify(words));
         io.sockets.emit('CMD:words', words);
-        // exec("afplay data/test_sound.mp3", outstream);
+        exec("afplay data/38.mp3", outstream);
     }, 10000);
 
     // all on
     setTimeout(function() {
         console.log("all on");
         io.sockets.emit('CMD:control', 'all_on');
-    }, 50000);
+    }, 56000);
 
     // exit
     setTimeout(function() {
         console.log("exit on");
         io.sockets.emit('CMD:control', 'exit_on');
         exec("afplay data/ding.wav; say please exit the profile cube and pick up your receipt to the right", outstream);
-    }, 55000);
+    }, 61000);
 
     // entry available
     setTimeout(function() {
         io.sockets.emit('EVENT:end');
-    }, 60000);
+    }, 66000);
 }
