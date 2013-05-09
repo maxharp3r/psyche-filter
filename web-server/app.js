@@ -151,12 +151,12 @@ var printer_routine = function(name, words, coupon) {
     var coupon_str = coupon['title'] + "\n" + coupon['description'] + "\nvisit " + coupon['link'];
 
     var post_data = querystring.stringify({
-        'msg1': 'Profile Cube Results',
-        'head': 'profile: ' + name,
+        'inverse': 'Profile Cube',
+        'large': name,
         'word': words.slice(0, -1),
         'lastword': words.slice(-1),
         'linefeed': '',
-        'msg2': 'Here is a personalized coupon for you, ' + name + ":",
+        'msg2': 'Profile Cube ValueFeed(tm):',
         'coupon': coupon_str
     });
     console.log("coupon:");
@@ -198,23 +198,39 @@ var cube_routine = function(name, words, top_category) {
 
     // entry blocked, spotlight on
     io.sockets.emit('EVENT:begin');
+    exec("say enter the profile cube and please shut the door behind you", outstream);
 
-    exec("afplay data/test_sound.mp3", outstream);
+    // print (need delay to give redis a chance to find something)
+    setTimeout(function() {
+        console.log("printing...");
+        if (coupon) {
+            console.log("found a coupon");
+            printer_routine(name, words, coupon);
+        }
+    }, 1000);
 
     // show words
     setTimeout(function() {
         console.log("emitting words:", JSON.stringify(words));
         io.sockets.emit('CMD:words', words);
-    }, 1000);
+        exec("afplay data/38.mp3", outstream);
+    }, 10000);
 
-    // print
+    // all on
     setTimeout(function() {
-        console.log("printing...");
-        printer_routine(name, words, coupon);
-    }, 1000);
+        console.log("all on");
+        io.sockets.emit('CMD:control', 'all_on');
+    }, 56000);
+
+    // exit
+    setTimeout(function() {
+        console.log("exit on");
+        io.sockets.emit('CMD:control', 'exit_on');
+        exec("afplay data/ding.wav; say please exit the profile cube and pick up your receipt to the right", outstream);
+    }, 61000);
 
     // entry available
     setTimeout(function() {
         io.sockets.emit('EVENT:end');
-    }, 15000);
+    }, 66000);
 }

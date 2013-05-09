@@ -15,6 +15,7 @@ function EntryCtrl($scope, $http, $location, $anchorScroll) {
 
             if (data["success"]) {
                 // good, socket.io will start the show (see EVENT:begin)
+                $("#name-input").blur();
             } else {
                 // bad, show a message
                 $scope.status.badname = true;

@@ -2,7 +2,7 @@
 // namespace
 var BLACK = {};
 
-BLACK.DELAY_MS = 50;
+BLACK.DELAY_MS = 200;
 
 BLACK.ids0 = ['absent-minded','accommodating','accurate','agitated','agreeable','aloof','altruistic','anti-intellectual','antisocial','anxious','argumentative','ashamed','assertive','blunt','brassy','callous','calm','carefree','careless','chaotic','cheerful','civic-minded','civil','clever','closed-minded','cocky','cold','collected','compassionate','competent','composed','confident','conforming','conscientious','conservative','considerate','controls_emotions','conventional','cool-headed','cooperative','creative','cynical','daydreamer','defiant','depressive','detail_oriented','dirty','disagreeable'];
 BLACK.ids1 = ['disciplined','disenchanted','disheveled','distant','distracted','do-gooder','dogmatic','dominant','driven','dutiful','efficient','emotional','empathetic','enthusiastic','erratic','exit','friendly','fun-loving','generous','gracious','gruff','guarded','haphazard','happy','hard-nosed','hardened','hasty','headstrong','helpful','hopeful','hostile','hot-tempered','imaginative','imposing','impromptu','impulsive','inconsiderate','inconspicuous','indifferent','indulgent','industrious','inflexible','ingenious','innovative','institutional','insulting','intellectual','introspective'];
