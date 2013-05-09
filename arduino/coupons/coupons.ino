@@ -66,17 +66,27 @@ void couponCmd(WebServer &server, WebServer::ConnectionType type, char *, bool) 
   printer.wake();
   printer.setDefault();
   while (server.readPOSTparam(name, NAMELEN, value, VALUELEN)) {
-    Serial.print("found post param: ");
-    Serial.println(name);
-    if (strncmp(name, "word", 4) == 0) {
+    // Serial.print("found post param: ");
+    // Serial.println(name);
+    if (strncmp(name, "large", 5) == 0) {
+      printer.setSize('L');
       printer.print(value);
-      printer.print(" ");
+      printer.setSize('S');
+      printer.feed(2);
+    } else if (strncmp(name, "inverse", 7) == 0) {
+      printer.inverseOn();
+      printer.print(value);
+      printer.inverseOff();
+      printer.feed(2);
+    } else if (strncmp(name, "word", 4) == 0) {
+      printer.print(value);
+      printer.print(", ");
     } else {
       printer.println(value);
       printer.feed(2);
     }
   }
-  printer.feed(2);
+  printer.feed(4);
   printer.sleep();
 }
 
